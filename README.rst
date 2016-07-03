@@ -20,7 +20,7 @@ LinkN[;MINUTES:SECONDS]
 
 Duration is not needed for the last link. 
 
-.. code-block::
+.. code::
 
   https://github.com/broija/enum_bit_flags;15:03
   https://github.com/broija/subdetection;14:15
@@ -29,6 +29,6 @@ Duration is not needed for the last link.
 Usage
 _____
 
-.. code-block:: sh
+.. code:: sh
 
   web_link_timer.exe /PATH/TO/CONFIG/FILE.ini
