@@ -12,11 +12,13 @@ This program is intended to open web pages during user-defined time.
 Config file
 ___________
 
-Link1;MINUTES:SECONDS
-Link2;MINUTES:SECONDS
-Link3;MINUTES:SECONDS
-...
-LinkN[;MINUTES:SECONDS]
+.. code::
+
+  Link1;MINUTES:SECONDS
+  Link2;MINUTES:SECONDS
+  Link3;MINUTES:SECONDS
+  ...
+  LinkN[;MINUTES:SECONDS]
 
 Duration is not needed for the last link. 
 
