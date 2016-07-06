@@ -144,6 +144,7 @@ void WebLinkManager::waitNext()
         while (count < duration)
         {
             std::this_thread::sleep_for(std::chrono::seconds(1));
+            ++count;
         }//if (count < duration)
 
         next();
