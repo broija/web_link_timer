@@ -25,8 +25,7 @@
 
 #include "weblinkmanager.h"
 
-WebLinkManager::WebLinkManager():
-    m_timer(std::chrono::seconds(1)),
+WebLinkManager::WebLinkManager()
     m_webLinkCount(0)
 {
 }//WebLinkManager
@@ -105,7 +104,6 @@ bool WebLinkManager::availableLinks()
 void WebLinkManager::launchList()
 {
     m_index = 0;
-    m_timer.resetCount();
 
     launch();
 
@@ -141,10 +139,12 @@ void WebLinkManager::waitNext()
 
         std::cout << "Duration: " << duration << std::endl;
 
-        while (m_timer.getCount() < duration)
+        uint32_t count = 0;
+
+        while (count < duration)
         {
             std::this_thread::sleep_for(std::chrono::seconds(1));
-        }//if (m_timer.getCount() < duration)
+        }//if (count < duration)
 
         next();
     }//if (availableLinks())
