@@ -139,7 +139,7 @@ void WebLinkManager::waitNext()
 
         std::cout << "Duration: " << duration << std::endl;
 
-        uint32_t count = 0;
+        WebLink::Duration count = 0;
 
         while (count < duration)
         {
