@@ -7,7 +7,7 @@ Tested on Win7 with:
  - **MinGW v4.8**.
  - and also **Cygwin 2.5.1** with **Clang v3.7.1**.
 
-This program is intended to open web pages during user-defined time.
+This program is intended to trigger web page openings after user-defined durations.
 
 Config file
 ___________
