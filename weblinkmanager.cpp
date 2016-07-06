@@ -20,6 +20,7 @@
 #include <functional>
 #include <fstream>
 #include <chrono>
+#include <thread>
 
 #include "logger.h"
 #include "char_tools.h"

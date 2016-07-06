@@ -19,7 +19,6 @@
 
 #include "logger.h"
 #include "weblinkmanager.h"
-#include "timer.h"
 
 int main(int _argc, char * _argv[])
 {
