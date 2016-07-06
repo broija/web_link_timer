@@ -1,7 +1,7 @@
 /*!
     Copyright 2016 Broija
 
-    This file is part of web_video_timer app.
+    This file is part of web_link_timer app.
 
     subdetection is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,13 +19,14 @@
 
 #include "char_tools.h"
 
-#include <iostream>
 #include <sstream>
 #include <cstdlib>
 #include <locale>
 #include <algorithm>
 
 #include <windows.h>
+
+#include "logger.h"
 
 std::vector<std::string> split(const char * _string, char _delimiter, int _count)
 {
@@ -95,8 +96,8 @@ std::vector<std::string> split(std::string _string, char _delimiter, int _count)
 template <>
 void printChars<char>(char * _chars, bool _endl)
 {
-    std::cout << _chars;
-    if (_endl) std::cout << std::endl;
+    sGlobLogger << _chars;
+    if (_endl) sGlobLogger << std::endl;
 }//printChars
 
 //--------------------------------------
@@ -104,18 +105,9 @@ void printChars<char>(char * _chars, bool _endl)
 template <>
 void printChars<const char>(const char * _chars, bool _endl)
 {
-    std::cout << _chars;
-    if (_endl) std::cout << std::endl;
+    sGlobLogger << _chars;
+    if (_endl) sGlobLogger << std::endl;
 }//printChars
-
-//--------------------------------------
-
-template <>
-void printChars<WCHAR>(WCHAR * _chars, bool _endl)
-{
-    std::wcout << _chars;
-    if (_endl) std::cout << std::endl;
-}//printChars WCHAR
 
 //--------------------------------------
 

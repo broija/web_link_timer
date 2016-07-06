@@ -1,7 +1,7 @@
 /*!
     Copyright 2016 Broija
 
-    This file is part of web_video_timer app.
+    This file is part of web_link_timer app.
 
     subdetection is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,11 +21,12 @@
 #include <fstream>
 #include <chrono>
 
+#include "logger.h"
 #include "char_tools.h"
 
 #include "weblinkmanager.h"
 
-WebLinkManager::WebLinkManager()
+WebLinkManager::WebLinkManager():
     m_webLinkCount(0)
 {
 }//WebLinkManager
@@ -42,7 +43,7 @@ WebLinkManager::WebLinkManager(std::string _filename):
 
 void WebLinkManager::loadConfigFile(std::string _filename)
 {
-    std::cout << "Loading config file: " << _filename << std::endl;
+    sGlobLogger << "Loading config file: " << _filename << std::endl;
 
     std::fstream cfgFile(_filename);
 
@@ -50,7 +51,7 @@ void WebLinkManager::loadConfigFile(std::string _filename)
 
     if (!cfgFile.is_open())
     {
-        std::cout << "Failed to open config file!" << std::endl;
+        sGlobLogger << "Failed to open config file!" << std::endl;
     }//if (!cfgFile.is_open())
     else
     {
@@ -63,7 +64,7 @@ void WebLinkManager::loadConfigFile(std::string _filename)
         {
             linkItems = split(line,';');
 
-            std::cout << "Link items:" << std::endl;
+            sGlobLogger << "Link items:" << std::endl;
 
             printStrings(linkItems);
 
@@ -73,7 +74,7 @@ void WebLinkManager::loadConfigFile(std::string _filename)
             {
                 timeItems = split(linkItems.at(1),':');
 
-                std::cout << "Time items:" << std::endl;
+                sGlobLogger << "Time items:" << std::endl;
 
                 printStrings(timeItems);
 
@@ -90,6 +91,8 @@ void WebLinkManager::loadConfigFile(std::string _filename)
     }//if (!file.is_open())...else
 
     m_webLinkCount = m_webLinks.size();
+
+    sGlobLogger << m_webLinkCount << " link(s) loaded." << std::endl;
 }//loadConfigFile
 
 //------------------
@@ -137,13 +140,23 @@ void WebLinkManager::waitNext()
     {
         WebLink::Duration duration = m_webLinks.at(m_index).duration;
 
-        std::cout << "Duration: " << duration << std::endl;
+        sGlobLogger << "Link: " << m_webLinks.at(m_index).url << std::endl;
+        sGlobLogger << "Duration: " << duration << std::endl;
 
         WebLink::Duration count = 0;
 
         while (count < duration)
         {
             std::this_thread::sleep_for(std::chrono::seconds(1));
+
+            ++count;
+
+            if (!(count %10))
+            {
+                sGlobLogger << count << std::endl;
+
+                if (!(count %30)) sGlobLogger.currentDatetime();
+            }//if (!(count %10))
         }//if (count < duration)
 
         next();
@@ -165,7 +178,7 @@ void WebLinkManager::launch()
     {
        WebLink weblink = m_webLinks.at(m_index);
 
-       std::cout << '[' << weblink.duration << ',' << weblink.url << "] " << m_index << std::endl;
+       sGlobLogger << '[' << weblink.duration << ',' << weblink.url << "] " << m_index << std::endl;
 
        HWND webBrowserWinHandle;
 
@@ -175,17 +188,17 @@ void WebLinkManager::launch()
        webBrowserWinHandle = FindWindow("MozillaWindowClass",NULL);
 #endif//!WVT_CYGWIN...else
 
-       if(webBrowserWinHandle == NULL)
+       if (webBrowserWinHandle == NULL)
        {
-           std::cout << "Web browser not found!" << std::endl;
+           sGlobLogger << "Web browser not found!" << std::endl;
            return;
-       }//if(webBrowserWinHandle == NULL)
+       }//if (webBrowserWinHandle == NULL)
 
-       if(!SetForegroundWindow(webBrowserWinHandle))
+       if (!SetForegroundWindow(webBrowserWinHandle))
        {
-           std::cout << "Couldn't set web browser to foreground!" << std::endl;
+           sGlobLogger << "Couldn't set web browser to foreground!" << std::endl;
            return;
-       }//if(!SetForegroundWindow(webBrowserWinHandle))
+       }//if (!SetForegroundWindow(webBrowserWinHandle))
 
        //First link to be opened?
        if (m_firstLink)

@@ -1,7 +1,7 @@
 /*!
     Copyright 2016 Broija
 
-    This file is part of web_video_timer app.
+    This file is part of web_link_timer app.
 
     subdetection is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

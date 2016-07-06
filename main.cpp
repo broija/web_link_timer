@@ -1,7 +1,7 @@
 /*!
     Copyright 2016 Broija
 
-    This file is part of web_video_timer app.
+    This file is part of web_link_timer app.
 
     subdetection is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
     along with subdetection library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "logger.h"
 #include "weblinkmanager.h"
 #include "timer.h"
 
@@ -26,9 +27,11 @@ int main(int _argc, char * _argv[])
 
     WebLinkManager webLinkManager;
 
+    sGlobLogger << "_________________________________" << std::endl;
+
     if (!(_argc > 1))
     {
-        std::cout << "No config file specified!" << std::endl;
+        sGlobLogger << "No config file specified!" << std::endl;
     }//if (!(_argc > 1))
     else
     {

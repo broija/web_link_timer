@@ -18,11 +18,13 @@ TEMPLATE = app
 HEADERS += char_tools.h \
     flags.h \
     keyboardinputsender.h \
+    logger.h \
     timer.h \
     weblinkmanager.h
 
 SOURCES += char_tools.cpp \
     keyboardinputsender.cpp \
+    logger.cpp \
     main.cpp \
     timer.cpp \
     weblinkmanager.cpp
