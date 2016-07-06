@@ -20,7 +20,6 @@
 #ifndef WVT_WEBLINKMANAGER_H
 #define WVT_WEBLINKMANAGER_H
 
-#include "timer.h"
 #include "keyboardinputsender.h"
 
 /*! \todo
@@ -65,7 +64,6 @@ protected:
     bool m_firstLink = true;
     std::size_t m_index;//Link list index
 
-    Timer m_timer;
     KeyboardInputSender m_kbInpSender;
 
     std::vector<WebLink> m_webLinks;
